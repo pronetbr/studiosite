@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Estúdio de Animação e Cinema</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="index.html">Estúdio Criativo</a>
+        </div>
+        <button class="nav-toggle" aria-label="toggle navigation">
+            <span class="hamburger"></span>
+        </button>
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                <li class="nav__item"><a href="portfolio.html" class="nav__link">Portfólio</a></li>
+                <li class="nav__item"><a href="about.html" class="nav__link">Sobre Nós</a></li>
+                <li class="nav__item"><a href="services.html" class="nav__link">Serviços</a></li>
+                <li class="nav__item"><a href="contact.html" class="nav__link">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Contato</h1>
+        <section id="contact-form-section">
+            <h3>Envie uma Mensagem</h3>
+            <form action="#" method="POST">
+                <div>
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="subject">Assunto:</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div>
+                    <label for="message">Mensagem:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+        <section id="social-contact">
+            <h3>Outras Formas de Contato</h3>
+            <p>Email: <a href="mailto:contato@estudioexemplo.com">contato@estudioexemplo.com</a></p>
+            <p>Telefone: (XX) XXXXX-XXXX</p>
+            <ul>
+                <li><a href="#" target="_blank">Instagram</a></li>
+                <li><a href="#" target="_blank">Vimeo</a></li>
+                <li><a href="#" target="_blank">LinkedIn</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Nome do Estúdio</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

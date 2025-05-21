@@ -21,6 +21,7 @@ body {
     color: var(--primary-light);
     background-color: var(--primary-dark);
     line-height: 1.6;
+    cursor: none; /* Hide default system cursor */
 }
 
 /* 2. Typography */
@@ -99,7 +100,7 @@ footer {
 /* 4. Page-Specific Sections */
 
 /* General card styling */
-.project-preview, .project-item, .service {
+.project-preview, .service { /* .project-item removed from this group */
     border: 1px solid var(--secondary-accent);
     padding: 1.5em;
     margin-bottom: 1.5em;
@@ -107,11 +108,27 @@ footer {
     background-color: #2a2a2a; /* Slightly lighter than main background */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+/* Keep specific .project-item styling separate or ensure no conflicts */
+.project-item {
+    position: relative; /* For overlay positioning */
+    overflow: hidden; /* To contain scaled image and overlay elements */
+    opacity: 0; /* Initial state for scroll animation */
+    transform: translateY(50px); /* Initial state for scroll animation */
+    /* transition: opacity 0.3s ease, transform 0.3s ease; GSAP will handle */
+    border: 1px solid var(--secondary-accent); /* Retain border from original group */
+    padding: 0; /* Remove padding if image fills it, or adjust as needed */
+    margin-bottom: 1.5em; /* Retain margin */
+    border-radius: 8px; /* Retain border-radius */
+    background-color: #2a2a2a; /* Retain background */
+}
 
-.project-preview:hover, .project-item:hover, .service:hover {
+
+.project-preview:hover, .service:hover { /* .project-item:hover removed from this group */
     transform: translateY(-5px);
     box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
 }
+/* Hover for project-item will be handled by GSAP for image and CSS for overlay */
+
 
 /* Responsive images */
 img {
@@ -122,43 +139,106 @@ img {
 }
 
 /* index.html */
+/* Updated #hero for GSAP animation */
 #hero {
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 3em 1em;
-    margin-bottom: 2em;
-    /* Placeholder for background - can be a gradient or image */
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/images/placeholder-hero-bg.jpg') no-repeat center center/cover;
-    border-radius: 8px;
+    position: relative; /* For positioning shapes and content */
+    padding: 3em 1em; /* Keep some padding */
+    margin-bottom: 2em; /* Keep margin */
+    /* overflow: hidden; /* Removed as per instructions */
 }
 
-#hero h2 {
-    font-size: 2.8em;
+.hero-content {
+    z-index: 2; /* Ensure content is above background shapes */
+    position: relative; /* To ensure z-index works as expected */
+}
+
+.hero-title {
+    font-size: clamp(2.8rem, 11vw, 6.5rem); /* Slightly increase max size */
     color: var(--primary-light);
     margin-bottom: 0.5em;
+    font-weight: 700; /* Ensure it's bold */
+    margin-top: 0; /* Reset margin from global h1,h2.. styles */
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.3), 0 0 20px rgba(0, 255, 255, 0.2); /* Subtle cyan glow */
 }
 
-#hero p {
-    font-size: 1.2em;
-    margin-bottom: 1.5em;
+.hero-title span {
+    display: inline-block; /* Allows transform */
+    opacity: 0; /* Start hidden for GSAP animation */
+    /* y: 0; /* GSAP will animate from this if not set, or from its current position */
 }
+
+.hero-subtitle {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    color: var(--accent-color);
+    margin-bottom: 2em;
+    opacity: 0; /* Start hidden for GSAP animation */
+}
+
+.hero-cta { /* Specific styling for hero CTA if needed, inherits from .cta-button */
+    opacity: 0; /* Start hidden for GSAP animation */
+}
+
+
+/* Background Shapes for Mouse Interaction */
+.hero-background-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden; /* Contain shapes within hero */
+}
+.shape {
+    position: absolute;
+    border-radius: 50%; /* Example shape */
+    background-color: rgba(0, 255, 255, 0.1); /* Subtle accent color */
+    /* GSAP will handle positioning for mouse interaction, initial positions are set here */
+}
+.shape-1 {
+    width: 200px; height: 200px;
+    top: 10%; left: 15%;
+}
+.shape-2 {
+    width: 100px; height: 100px;
+    top: 60%; left: 70%;
+}
+.shape-3 {
+    width: 150px; height: 150px;
+    top: 40%; left: 40%;
+}
+
 
 .cta-button {
     display: inline-block;
-    background-color: var(--accent-color);
-    color: var(--primary-dark);
-    padding: 0.8em 1.5em;
+    /* background-color: var(--accent-color); /* Remove or comment out flat color */
+    background-image: linear-gradient(45deg, var(--accent-color) 0%, #00d1d1 100%); /* Cyan gradient */
+    color: var(--primary-dark); /* Keep text color for contrast */
+    padding: 0.8em 1.5em; /* Ensure padding is good */
     border: none;
-    border-radius: 5px;
+    border-radius: 5px; /* Keep or adjust */
+    text-transform: uppercase; /* More impactful text */
+    letter-spacing: 1px; /* More impactful text */
     font-family: var(--font-headings);
-    font-weight: 700;
+    font-weight: bold; /* Ensure bold */
     text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative; /* For shine effect and other pseudo elements */
+    overflow: hidden; /* For shine effect */
+    box-shadow: 0 4px 15px rgba(0, 200, 200, 0.2); /* Softer shadow related to accent */
+    transition: all 0.3s ease; /* Keep transitions for other properties if any */
+    z-index: 1; /* Ensure button content is above potential background elements */
 }
 
 .cta-button:hover {
-    background-color: var(--secondary-accent);
-    color: var(--primary-dark);
-    text-decoration: none;
+    /* text-decoration: none; */ /* Already set in .cta-button */
+    background-image: linear-gradient(45deg, #00d1d1 0%, var(--accent-color) 100%); /* Shift gradient */
+    box-shadow: 0 6px 20px rgba(0, 220, 220, 0.3);
+    /* transform: translateY(-2px); GSAP handles scale, so explicit transform might conflict */
 }
 
 #philosophy {
@@ -203,9 +283,50 @@ img {
     gap: 1.5em;
 }
 
-.project-item img {
-    margin-bottom: 1em;
+/* Updated .project-item img styles */
+#portfolio-grid .project-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease; /* For hover scale on image */
+    /* margin-bottom: 1em; /* Removed as overlay will handle info */
+    border-radius: 0; /* If image should fill the item without its own radius */
 }
+
+/* Overlay content styling */
+#portfolio-grid .project-item .project-info-overlay {
+    position: absolute;
+    bottom: 0; /* Start at the bottom, will slide up */
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent background */
+    color: var(--primary-light);
+    padding: 1em;
+    transform: translateY(100%); /* Initially hidden below the item */
+    transition: transform 0.4s ease; /* For hover slide-in */
+}
+
+#portfolio-grid .project-item .project-info-overlay h4 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-size: 1.2em;
+    color: var(--accent-color);
+}
+
+#portfolio-grid .project-item .project-info-overlay p {
+    margin-bottom: 0;
+    font-size: 0.9em;
+}
+
+/* Hover states */
+#portfolio-grid .project-item:hover img {
+    /* transform: scale(1.1); GSAP will handle this */
+}
+
+#portfolio-grid .project-item:hover .project-info-overlay {
+    transform: translateY(0%); /* Slide overlay into view */
+}
+
 
 /* about.html */
 #story {
@@ -249,39 +370,51 @@ img {
 #contact-form-section textarea {
     width: 100%;
     padding: 0.7em;
-    border: 1px solid var(--secondary-accent);
+    /* border: 1px solid var(--secondary-accent); */ /* Removed for GSAP */
+    border: none; /* Remove default border if any */
+    border-bottom: 2px solid #ccc; /* Default bottom border */
     background-color: var(--primary-dark);
     color: var(--primary-light);
-    border-radius: 5px;
+    border-radius: 0px; /* Adjusted for bottom border focus style */
     font-family: var(--font-body);
+    /* transition: border-color 0.3s ease; GSAP will handle */
 }
 
 #contact-form-section input[type="text"]:focus,
 #contact-form-section input[type="email"]:focus,
 #contact-form-section textarea:focus {
     outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 5px var(--accent-color);
+    /* border-color: var(--accent-color); GSAP will handle */
+    /* box-shadow: 0 0 5px var(--accent-color); GSAP might handle or this can be kept */
 }
 
 #contact-form-section button[type="submit"] {
     /* Reuse .cta-button styles */
     display: inline-block;
-    background-color: var(--accent-color);
-    color: var(--primary-dark);
-    padding: 0.8em 1.5em;
+    /* background-color: var(--accent-color); /* Remove or comment out flat color */
+    background-image: linear-gradient(45deg, var(--accent-color) 0%, #00d1d1 100%); /* Cyan gradient */
+    color: var(--primary-dark); /* Keep text color for contrast */
+    padding: 0.8em 1.5em; /* Ensure padding is good */
     border: none;
-    border-radius: 5px;
+    border-radius: 5px; /* Keep or adjust */
+    text-transform: uppercase; /* More impactful text */
+    letter-spacing: 1px; /* More impactful text */
     font-family: var(--font-headings);
-    font-weight: 700;
+    font-weight: bold; /* Ensure bold */
     text-decoration: none;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative; /* For shine effect */
+    overflow: hidden; /* For shine effect */
+    box-shadow: 0 4px 15px rgba(0, 200, 200, 0.2); /* Softer shadow related to accent */
+    transition: all 0.3s ease; /* Keep transitions for other properties if any */
+    z-index: 1; /* Ensure button content is above potential background elements */
 }
 
 #contact-form-section button[type="submit"]:hover {
-    background-color: var(--secondary-accent);
-    color: var(--primary-dark);
+    /* text-decoration: none; */ /* Already set */
+    background-image: linear-gradient(45deg, #00d1d1 0%, var(--accent-color) 100%); /* Shift gradient */
+    box-shadow: 0 6px 20px rgba(0, 220, 220, 0.3);
+    /* transform: translateY(-2px); GSAP handles scale, so explicit transform might conflict */
 }
 
 #social-contact {
@@ -481,15 +614,49 @@ nav.nav ul.nav__list li.nav__item a.nav__link { /* More specific selector */
     font-weight: 700; /* This was from original */
     color: var(--primary-light); /* Ensure default color is light */
     display: block; /* Good for mobile layout */
+    position: relative; /* For pseudo-element */
+    padding-bottom: 5px; /* Space for the line */
+    overflow: hidden; /* If line slides in from outside */
+}
+
+nav.nav ul.nav__list li.nav__item a.nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: var(--underline-left, -100%); /* Use CSS variable */
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    /* transition: left 0.3s ease; GSAP will handle this */
 }
 
 nav.nav ul.nav__list li.nav__item a.nav__link:hover,
 nav.nav ul.nav__list li.nav__item a.nav__link.active { /* More specific selector */
-    color: var(--primary-dark); /* This was from original */
-    background-color: var(--accent-color); /* This was from original */
+    /* color: var(--primary-dark); */ /* GSAP might handle hover color or this can be kept as fallback */
+    /* background-color: var(--accent-color); */ /* GSAP might handle or remove if not needed */
     border-radius: 5px; /* This was from original */
     text-decoration: none; /* This was from original */
+    /* No background color change on hover/active if line animation is primary feedback */
+    background-color: transparent; /* Remove background for hover/active */
+    color: var(--primary-light); /* Keep text color consistent or let GSAP handle */
 }
+
+/* Ensure other header nav links also get this structure if they are different */
+header nav > ul > li > a { /* A more general selector for header nav links if not covered by .nav__link */
+    position: relative;
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+header nav > ul > li > a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: var(--underline-left, -100%); /* Use CSS variable */
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
 
 /* 8. Lightbox Gallery (Portfolio) */
 .lightbox-modal {
@@ -537,41 +704,15 @@ nav.nav ul.nav__list li.nav__item a.nav__link.active { /* More specific selector
 }
 
 /* Ensure project item images are clickable */
-.project-item img {
+/* Ensure project item images are clickable for lightbox - this might conflict with new hover logic if not handled carefully */
+.project-item img { /* This rule was already modified above, ensure cursor:pointer is retained if lightbox is still active */
     cursor: pointer;
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Added transform */
+    /* transition: opacity 0.3s ease, transform 0.3s ease; /* This is handled by new rules */
 }
-.project-item img:hover {
-    opacity: 0.7;
-    transform: scale(1.03); /* Slight zoom on hover */
-}
+/* The opacity and scale hover on img itself is now handled by GSAP or the new .project-item:hover img */
 
-/* 9. Hero Particle Animation */
-#hero {
-    position: relative; /* Needed for absolute positioning of particles */
-    overflow: hidden; /* Keep particles contained */
-    min-height: 70vh; /* Ensure hero has some height */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
-@keyframes move-particles {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-100vh) scale(0.5); opacity: 0; } /* Move up and fade */
-}
-
-.particle {
-    position: absolute;
-    bottom: -20px; /* Start from below the screen */
-    width: 5px;
-    height: 5px;
-    background-color: var(--accent-color);
-    border-radius: 50%;
-    opacity: 0; /* Start transparent, JS will handle initial opacity if needed, or animation handles it */
-    animation: move-particles 10s linear infinite;
-}
+/* Removed old particle animation CSS: .particle and @keyframes move-particles */
 
 /* Adjustments in Media Queries for new Nav */
 @media (max-width: 768px) {
@@ -629,4 +770,58 @@ nav.nav ul.nav__list li.nav__item a.nav__link.active { /* More specific selector
         width: 100%;
         text-align: center;
     }
+}
+
+/* 10. Page Transition Styles */
+body.is-transitioning {
+    overflow: hidden; /* Prevent scrollbars during transition */
+}
+
+.page-transition-wrapper {
+    opacity: 0; /* Start with new page content invisible */
+    transform: translateY(20px); /* Optional: slight upward movement for fade-in */
+}
+
+/* 11. Custom Cursor Styles */
+#custom-cursor-dot {
+    pointer-events: none; /* So it doesn't interfere with clicks */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Center on mouse position */
+    z-index: 9999; /* Ensure it's on top */
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease; /* Smooth transitions */
+}
+
+#custom-cursor-ring {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9998;
+    opacity: 0.5;
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hover state for the cursor */
+body.cursor-hover #custom-cursor-dot {
+    width: 12px; /* Slightly larger dot */
+    height: 12px;
+    background-color: var(--primary-light); /* Change color */
+}
+
+body.cursor-hover #custom-cursor-ring {
+    width: 40px; /* Larger ring */
+    height: 40px;
+    opacity: 1;
+    border-color: var(--primary-light);
 }

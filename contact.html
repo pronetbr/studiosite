@@ -24,44 +24,48 @@
             </ul>
         </nav>
     </header>
-    <main>
-        <h1>Contato</h1>
-        <section id="contact-form-section">
-            <h3>Envie uma Mensagem</h3>
-            <form action="#" method="POST">
-                <div>
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div>
-                    <label for="subject">Assunto:</label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
-                <div>
-                    <label for="message">Mensagem:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit">Enviar</button>
-            </form>
-        </section>
-        <section id="social-contact">
-            <h3>Outras Formas de Contato</h3>
-            <p>Email: <a href="mailto:contato@estudioexemplo.com">contato@estudioexemplo.com</a></p>
-            <p>Telefone: (XX) XXXXX-XXXX</p>
-            <ul>
-                <li><a href="#" target="_blank">Instagram</a></li>
-                <li><a href="#" target="_blank">Vimeo</a></li>
-                <li><a href="#" target="_blank">LinkedIn</a></li>
-            </ul>
-        </section>
-    </main>
+    <div class="page-transition-wrapper"> <!-- New wrapper -->
+        <main>
+            <h1>Contato</h1>
+            <section id="contact-form-section">
+                <h3>Envie uma Mensagem</h3>
+                <form action="#" method="POST">
+                    <div>
+                        <label for="name">Nome:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="subject">Assunto:</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div>
+                        <label for="message">Mensagem:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit">Enviar</button>
+                </form>
+            </section>
+            <section id="social-contact">
+                <h3>Outras Formas de Contato</h3>
+                <p>Email: <a href="mailto:contato@estudioexemplo.com">contato@estudioexemplo.com</a></p>
+                <p>Telefone: (XX) XXXXX-XXXX</p>
+                <ul>
+                    <li><a href="#" target="_blank">Instagram</a></li>
+                    <li><a href="#" target="_blank">Vimeo</a></li>
+                    <li><a href="#" target="_blank">LinkedIn</a></li>
+                </ul>
+            </section>
+        </main>
+    </div> <!-- End new wrapper -->
     <footer>
         <p>&copy; 2023 Nome do Estúdio</p>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

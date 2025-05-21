@@ -24,39 +24,51 @@
             </ul>
         </nav>
     </header>
-    <main>
-        <h1>Portfólio</h1>
-        <section id="portfolio-filters">
-            <button data-filter="all">Todos</button>
-            <button data-filter="animation">Animação</button>
-            <button data-filter="film">Filmes</button>
-        </section>
-        <section id="portfolio-grid">
-            <article class="project-item">
-                <img src="assets/images/placeholder-project-thumb1.jpg" alt="Thumbnail do Projeto A" loading="lazy">
-                <h4>Projeto A</h4>
-                <p>Curta descrição do Projeto A.</p>
-            </article>
-            <article class="project-item">
-                <img src="assets/images/placeholder-project-thumb2.jpg" alt="Thumbnail do Projeto B" loading="lazy">
-                <h4>Projeto B</h4>
-                <p>Curta descrição do Projeto B.</p>
-            </article>
-            <article class="project-item">
-                <img src="assets/images/placeholder-project-thumb3.jpg" alt="Thumbnail do Projeto C" loading="lazy">
-                <h4>Projeto C</h4>
-                <p>Curta descrição do Projeto C.</p>
-            </article>
-            <article class="project-item">
-                <img src="assets/images/placeholder-project-thumb4.jpg" alt="Thumbnail do Projeto D" loading="lazy">
-                <h4>Projeto D</h4>
-                <p>Curta descrição do Projeto D.</p>
-            </article>
-        </section>
-    </main>
+    <div class="page-transition-wrapper"> <!-- New wrapper -->
+        <main>
+            <h1>Portfólio</h1>
+            <section id="portfolio-filters">
+                <button data-filter="all">Todos</button>
+                <button data-filter="animation">Animação</button>
+                <button data-filter="film">Filmes</button>
+            </section>
+            <section id="portfolio-grid">
+                <article class="project-item">
+                    <img src="assets/images/placeholder-project-thumb1.jpg" alt="Thumbnail do Projeto A" loading="lazy">
+                    <div class="project-info-overlay">
+                        <h4>Projeto A</h4>
+                        <p>Curta descrição do Projeto A.</p>
+                    </div>
+                </article>
+                <article class="project-item">
+                    <img src="assets/images/placeholder-project-thumb2.jpg" alt="Thumbnail do Projeto B" loading="lazy">
+                    <div class="project-info-overlay">
+                        <h4>Projeto B</h4>
+                        <p>Curta descrição do Projeto B.</p>
+                    </div>
+                </article>
+                <article class="project-item">
+                    <img src="assets/images/placeholder-project-thumb3.jpg" alt="Thumbnail do Projeto C" loading="lazy">
+                    <div class="project-info-overlay">
+                        <h4>Projeto C</h4>
+                        <p>Curta descrição do Projeto C.</p>
+                    </div>
+                </article>
+                <article class="project-item">
+                    <img src="assets/images/placeholder-project-thumb4.jpg" alt="Thumbnail do Projeto D" loading="lazy">
+                    <div class="project-info-overlay">
+                        <h4>Projeto D</h4>
+                        <p>Curta descrição do Projeto D.</p>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div> <!-- End new wrapper -->
     <footer>
         <p>&copy; 2023 Nome do Estúdio</p>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="js/script.js"></script>
     <div id="lightbox-modal" class="lightbox-modal" style="display: none;">
         <span class="lightbox-close">&times;</span>
